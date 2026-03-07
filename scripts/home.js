@@ -6,13 +6,13 @@ const allIssueContainer = document.getElementById("cards-section");
 
 const showLoading = () => {
 
-    loadingContainer.classList.remove("hidden")
-    allIssueContainer.classList.add("hidden")
+  loadingContainer.classList.remove("hidden")
+  allIssueContainer.classList.add("hidden")
 }
 const hideLoading = () => {
-    
-    loadingContainer.classList.add("hidden")
-    allIssueContainer.classList.remove("hidden")
+
+  loadingContainer.classList.add("hidden")
+  allIssueContainer.classList.remove("hidden")
 }
 
 const allIssues = async () => {
@@ -41,6 +41,57 @@ const closedIssues = async () => {
   hideLoading();
   displayCards(closed);
 }
+const loadIssueDetails = async (id) => {
+  const response = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
+  const data = await response.json();
+  displayIssueDetails(data.data);
+
+}
+const displayIssueDetails = (issue) => {
+  const detailsContainer = document.getElementById("details-container");
+  let priorityColor = "bg-gray-200 text-gray-700";
+
+  if (issue.priority === "high") {
+    priorityColor = "bg-red-100 text-red-600";
+  }
+  else if (issue.priority === "medium") {
+    priorityColor = "bg-yellow-100 text-yellow-600";
+  }
+  detailsContainer.innerHTML = `
+  <div class="flex flex-col items-start space-y-5 ">
+    <h3 class="text-xl font-bold">${issue.title}</h3>
+    <div class= "flex items-center justify-start gap-3">
+    <span class="text-xs px-3 py-1 rounded-full ${issue.status === 'open' ? 'bg-green-600 text-green-100' : 'bg-red-600 text-red-100'}"> ${issue.status}  </span>
+    <p class="text-[12px] text-gray-500"> <span class="text-xl font-bold text-gray-500">.</span> Opened By: ${issue.author}</p> 
+    <p class="text-[12px] text-gray-500"> <span class="text-xl font-bold text-gray-500">.</span> ${new Date(issue.createdAt).toLocaleDateString()}</p>
+    </div>
+     <div class="flex flex-wrap gap-2">
+        ${issue.labels
+      .map(tag => `
+            <span class="text-xs px-3 py-1 rounded-full ${tag === 'bug' ? 'bg-red-100 text-red-600 border border-red-200' : tag === 'enhancement' ? 'bg-green-100 text-green-600 border border-green-200' : tag === 'help wanted' ? 'bg-yellow-100 text-yellow-600 border border-yellow-200' : tag === 'good first issue' ? 'bg-gray-100 text-gray-600 border border-gray-200' : tag === 'documentation' ? 'bg-blue-100 text-blue-600 border border-blue-200' : ''}">
+              ${tag}
+            </span>
+          `)
+      .join('')
+    }
+      </div>
+    <p class="text-[12px] font-light text-gray-600">${issue.description} </p>
+    <div class="w-full h-10 flex items-center justify-start rounded-md  bg-slate-100 px-3 py-8">
+    <div class="w-1/2 text-[12px] text-gray-900 "><p>Assignee: <br> <span class="text-[15px] font-bold">${issue.assignee || 'Unassigned'} </span></p></div>
+    <div class=" text-[12px] text-gray-900 grid grid-cols-1 grid-rows-1  gap-2" ><div>Priority:</div><div class="text-xs font-semibold px-3 py-1 rounded-full ${priorityColor}">
+          ${issue.priority.toUpperCase()}
+        </div>
+      </div>
+    </div>
+   </div>
+
+        <form class='flex justify-end items-cente' method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn btn-primary">Close</button>
+      </form>
+  `;
+  document.getElementById("my_modal_5").showModal();
+}
 document.getElementById('search-boxs').addEventListener('change', async (e) => {
 
   const query = e.target.value.toLowerCase();
@@ -54,7 +105,7 @@ document.getElementById('search-boxs').addEventListener('change', async (e) => {
 const allFilter = document.getElementById("all-btn");
 const interviewFilter = document.getElementById("open-btn");
 const rejectedFilter = document.getElementById("closed-btn");
-  allFilter.addEventListener("click", function () {
+allFilter.addEventListener("click", function () {
   interviewFilter.classList.remove("btn-primary");
   rejectedFilter.classList.remove("btn-primary");
 
@@ -84,7 +135,7 @@ const displayCards = (issues) => {
 
     if (issue.priority === "high") {
       priorityColor = "bg-red-100 text-red-600";
-    } 
+    }
     else if (issue.priority === "medium") {
       priorityColor = "bg-yellow-100 text-yellow-600";
     }
@@ -95,7 +146,7 @@ const displayCards = (issues) => {
       : "border-primary/60";
 
     const card = document.createElement('div');
-
+    card.setAttribute("onclick", "loadIssueDetails(" + issue.id + ")");
     card.className = `
       bg-white border-t-4 ${statusBorder}
       rounded-xl shadow-md hover:shadow-lg
@@ -127,15 +178,14 @@ const displayCards = (issues) => {
 
      
       <div class="flex flex-wrap gap-2 mb-4">
-        ${
-          issue.labels
-          .map(tag => `
-            <span class="text-xs px-3 py-1 rounded-full ${tag === 'bug' ? 'bg-red-100 text-red-600 border border-red-200' :tag === 'enhancement' ? 'bg-green-100 text-green-600 border border-green-200' :tag==='help wanted' ? 'bg-yellow-100 text-yellow-600 border border-yellow-200' : tag === 'good first issue' ? 'bg-gray-100 text-gray-600 border border-gray-200' : tag ==='documentation' ? 'bg-blue-100 text-blue-600 border border-blue-200':''}">
+        ${issue.labels
+        .map(tag => `
+            <span class="text-xs px-3 py-1 rounded-full ${tag === 'bug' ? 'bg-red-100 text-red-600 border border-red-200' : tag === 'enhancement' ? 'bg-green-100 text-green-600 border border-green-200' : tag === 'help wanted' ? 'bg-yellow-100 text-yellow-600 border border-yellow-200' : tag === 'good first issue' ? 'bg-gray-100 text-gray-600 border border-gray-200' : tag === 'documentation' ? 'bg-blue-100 text-blue-600 border border-blue-200' : ''}">
               ${tag}
             </span>
           `)
-          .join('')
-        }
+        .join('')
+      }
       </div>
 
       <hr>
