@@ -5,13 +5,30 @@ const allIssues = async () => {
   loadSpinner(true);
   const response = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
   const data = await response.json();
+  document.getElementById('issues-counter').textContent = data.data.length;
   displayCards(data.data);
 };
+const openIssues = async () => {
+  loadSpinner(true);
+  const response = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
+  const data = await response.json();
+  const open = data.data.filter(issue => issue.status === "open");
+  document.getElementById('issues-counter').textContent = open.length;
+  displayCards(open);
+}
+const closedIssues = async () => {
+  loadSpinner(true);
+  const response = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
+  const data = await response.json();
+  const closed = data.data.filter(issue => issue.status === "closed");
+  document.getElementById('issues-counter').textContent = closed.length;
+  displayCards(closed);
+}
 const loadSpinner = (status) => {
   const cardsSection = document.getElementById('cards-section'); 
   const createdDiv= document.createElement('div');
    createdDiv.className = 'spinner-container col-span-full flex justify-center items-center';
-   createdDiv.innerHTML = '<span  class="loading loading-bars loading-xl  p-10"></span>'; 
+   createdDiv.innerHTML = '<span  class="loading loading-bars loading-xl w-[2%]  p-10"></span>'; 
   if (status === true) {
       cardsSection.appendChild(createdDiv);
   }
@@ -19,6 +36,27 @@ const loadSpinner = (status) => {
   
 }
 
+const allFilter = document.getElementById("all-btn");
+const interviewFilter = document.getElementById("open-btn");
+const rejectedFilter = document.getElementById("closed-btn");
+  allFilter.addEventListener("click", function () {
+  interviewFilter.classList.remove("btn-primary");
+  rejectedFilter.classList.remove("btn-primary");
+
+  allFilter.classList.add("btn-primary");
+});
+interviewFilter.addEventListener("click", function () {
+  allFilter.classList.remove("btn-primary");
+  rejectedFilter.classList.remove("btn-primary");
+
+  interviewFilter.classList.add("btn-primary");
+});
+rejectedFilter.addEventListener("click", function () {
+  allFilter.classList.remove("btn-primary");
+  interviewFilter.classList.remove("btn-primary");
+
+  rejectedFilter.classList.add("btn-primary");
+});
 allIssues();
 
 const displayCards = (issues) => {
@@ -58,7 +96,7 @@ const displayCards = (issues) => {
         </div>
 
         <span class="text-xs font-semibold px-3 py-1 rounded-full ${priorityColor}">
-          ${issue.priority || 'LOW'}
+          ${issue.priority.toUpperCase()}
         </span>
 
       </div>
@@ -91,12 +129,13 @@ const displayCards = (issues) => {
       <div class="flex justify-between pt-3 text-gray-500 text-xs">
 
         <div>
+          <p>#${issue.id} by </p>
           <p class="font-semibold">Author</p>
           <p class="font-bold">${issue.author}</p>
           <p>Created: ${new Date(issue.createdAt).toLocaleDateString()}</p>
         </div>
 
-        <div class="text-right">
+        <div class="text-right space-y-2">
           <p class="font-semibold">Assigned</p>
           <p class="font-bold">${issue.assignee || 'Unassigned'}</p>
           <p>Updated: ${new Date(issue.updatedAt).toLocaleDateString()}</p>

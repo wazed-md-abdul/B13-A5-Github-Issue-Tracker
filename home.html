@@ -56,9 +56,9 @@
   <!-- catagory section  -->
   <section class="container max-w-[75%] w-full mx-auto p-4">
     <div class="flex flex-col sm:flex-row justify-start items-center gap-3 my-4 bg-white p-4 rounded-lg shadow">
-      <button onclick="allIssues()" class="btn btn-primary w-full sm:w-auto">All</button>
-      <button class="btn btn-soft w-full sm:w-auto">Open</button>
-      <button class="btn btn-soft w-full sm:w-auto">Closed</button>
+      <button id="all-btn" onclick="allIssues()" class="btn btn-primary w-full sm:w-auto">All</button>
+      <button id="open-btn" onclick="openIssues() " class="btn w-full sm:w-auto">Open</button>
+      <button id="closed-btn" onclick="closedIssues()" class="btn w-full sm:w-auto">Closed</button>
     </div>
 
   </section>
@@ -70,7 +70,7 @@
         <img class="w-8 h-8 " src="./assets/Aperture.png" alt="" />
       </div>
       <div class="flex flex-col">
-        <h1 class=" font-medium"> <span>50</span> issues</h1>
+        <h1 class=" font-medium"> <span id="issues-counter">50</span> issues</h1>
         <p class="text-gray-500 text-[12px]">Track and manage your project issues</p>
       </div>
     </div>
