@@ -48,7 +48,7 @@
             <path d="m21 21-4.3-4.3"></path>
           </g>
         </svg>
-        <input type="search" required placeholder="Search Issues... " class="w-full" />
+        <input id="search-boxs" type="search" required placeholder="Search Issues... " class="w-full" />
       </label>
       <button class="btn btn-primary w-full sm:w-auto"> <i class="fa-solid fa-plus"></i>New Issue</button>
     </div>
@@ -82,9 +82,16 @@
     </div>
   </section>
   <!-- cards section  -->
-  <section id="cards-section"
-    class="container max-w-7xl w-full mx-auto p-4  bg-white rounded-lg shadow mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
-    
+  <section>
+    <section id="loading-section" class="  text-center py-30  hidden">
+
+      <span class="loading loading-spinner text-primary"> loading</span>
+
+    </section>
+    <section id="cards-section"
+      class="container max-w-7xl w-full mx-auto p-4  bg-white rounded-lg shadow mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
+
+    </section>
   </section>
   <script src="./scripts/home.js"></script>
 </body>

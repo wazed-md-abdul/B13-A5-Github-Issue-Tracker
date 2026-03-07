@@ -1,40 +1,55 @@
 
 console.log("home connected");
 
+const loadingContainer = document.getElementById("loading-section");
+const allIssueContainer = document.getElementById("cards-section");
+
+const showLoading = () => {
+
+    loadingContainer.classList.remove("hidden")
+    allIssueContainer.classList.add("hidden")
+}
+const hideLoading = () => {
+    
+    loadingContainer.classList.add("hidden")
+    allIssueContainer.classList.remove("hidden")
+}
+
 const allIssues = async () => {
-  loadSpinner(true);
+  showLoading();
   const response = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
   const data = await response.json();
   document.getElementById('issues-counter').textContent = data.data.length;
+  hideLoading();
   displayCards(data.data);
 };
 const openIssues = async () => {
-  loadSpinner(true);
+  showLoading();
   const response = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
   const data = await response.json();
   const open = data.data.filter(issue => issue.status === "open");
   document.getElementById('issues-counter').textContent = open.length;
+  hideLoading();
   displayCards(open);
 }
 const closedIssues = async () => {
-  loadSpinner(true);
+  showLoading();
   const response = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
   const data = await response.json();
   const closed = data.data.filter(issue => issue.status === "closed");
   document.getElementById('issues-counter').textContent = closed.length;
+  hideLoading();
   displayCards(closed);
 }
-const loadSpinner = (status) => {
-  const cardsSection = document.getElementById('cards-section'); 
-  const createdDiv= document.createElement('div');
-   createdDiv.className = 'spinner-container col-span-full flex justify-center items-center';
-   createdDiv.innerHTML = '<span  class="loading loading-bars loading-xl w-[2%]  p-10"></span>'; 
-  if (status === true) {
-      cardsSection.appendChild(createdDiv);
-  }
-  
-  
-}
+document.getElementById('search-boxs').addEventListener('change', async (e) => {
+
+  const query = e.target.value.toLowerCase();
+  const response = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${query}`);
+  const data = await response.json();
+  document.getElementById('issues-counter').textContent = data.data.length;
+  displayCards(data.data);
+});
+
 
 const allFilter = document.getElementById("all-btn");
 const interviewFilter = document.getElementById("open-btn");
