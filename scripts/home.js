@@ -1,17 +1,29 @@
+
 console.log("home connected");
 
 const allIssues = async () => {
+  loadSpinner(true);
   const response = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
   const data = await response.json();
   displayCards(data.data);
 };
+const loadSpinner = (status) => {
+  const cardsSection = document.getElementById('cards-section'); 
+  const createdDiv= document.createElement('div');
+   createdDiv.className = 'spinner-container col-span-full flex justify-center items-center';
+   createdDiv.innerHTML = '<span  class="loading loading-bars loading-xl  p-10"></span>'; 
+  if (status === true) {
+      cardsSection.appendChild(createdDiv);
+  }
+  
+  
+}
 
 allIssues();
 
 const displayCards = (issues) => {
   const cardsSection = document.getElementById('cards-section');
   cardsSection.innerHTML = '';
-
   issues.forEach(issue => {
 
     // Priority color
@@ -96,3 +108,5 @@ const displayCards = (issues) => {
     cardsSection.appendChild(card);
   });
 };
+
+
