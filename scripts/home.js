@@ -93,7 +93,7 @@ const displayIssueDetails = (issue) => {
   document.getElementById("my_modal_5").showModal();
 }
 document.getElementById('search-boxs').addEventListener('change', async (e) => {
-
+  showLoading();
   const query = e.target.value.toLowerCase();
   if (query.trim() === '') {
     allIssues();
@@ -101,6 +101,7 @@ document.getElementById('search-boxs').addEventListener('change', async (e) => {
   }
   const response = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${query}`);
   const data = await response.json();
+  hideLoading();
   document.getElementById('issues-counter').textContent = data.data.length;
   displayCards(data.data);
 });
