@@ -95,6 +95,10 @@ const displayIssueDetails = (issue) => {
 document.getElementById('search-boxs').addEventListener('change', async (e) => {
 
   const query = e.target.value.toLowerCase();
+  if (query.trim() === '') {
+    allIssues();
+    return;
+  }
   const response = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${query}`);
   const data = await response.json();
   document.getElementById('issues-counter').textContent = data.data.length;
