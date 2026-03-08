@@ -20,9 +20,6 @@ Template literals allow string interpolation and multiline strings using backtic
 
 Check out the live version of the project [here](https://github-issue-tracker-programming-h.netlify.app/).
 
-### Styling and Animation:
-
-```html
 <a href="https://github-issue-tracker-programming-h.netlify.app/" target="_blank" style="display: inline-block; padding: 10px 20px; font-size: 18px; color: #fff; background-color: #4CAF50; border-radius: 5px; text-decoration: none; transition: all 0.3s ease;">
   View Live Demo
 </a>
@@ -38,6 +35,7 @@ Check out the live version of the project [here](https://github-issue-tracker-pr
     transform: scale(0.95);
   }
 </style>
+
 
 
 
