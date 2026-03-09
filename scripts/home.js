@@ -92,7 +92,7 @@ const displayIssueDetails = (issue) => {
   `;
   document.getElementById("my_modal_5").showModal();
 }
-document.getElementById('search-boxs').addEventListener('change', async (e) => {
+document.getElementById('search-boxs').addEventListener('keyup', async (e) => {
   showLoading();
   const query = e.target.value.toLowerCase();
   if (query.trim() === '') {
