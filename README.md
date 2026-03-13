@@ -32,8 +32,6 @@ This project demonstrates how an issue tracking system works and provides a simp
 🛠 Tech Stack
 Frontend
 <p> <img src="https://skillicons.dev/icons?i=html,css,js,react,tailwind" /> </p>
-Backend / Database
-<p> <img src="https://skillicons.dev/icons?i=nodejs,express,mongodb,firebase" /> </p>
 Tools
 <p> <img src="https://skillicons.dev/icons?i=git,github,vscode" /> </p>
 📂 Project Structure
@@ -70,8 +68,6 @@ npm install
 Run the project
 
 npm run dev
-📊 GitHub Stats
-<p align="center"> <img src="https://github-readme-stats.vercel.app/api?username=wazed-md-abdul&show_icons=true&theme=tokyonight" /> <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=wazed-md-abdul&layout=compact&theme=tokyonight" /> </p>
 🎯 Learning Objectives
 
 This project helped practice:
