@@ -15,21 +15,15 @@ This project demonstrates how an issue tracking system works and provides a simp
 
 ✨ Key Features
 
-✅ Create and manage issues
-✅ Track bug reports and project tasks
-✅ Update issue status
-✅ Clean and responsive UI
-✅ Organized issue tracking system
-✅ Developer-friendly workflow
+✅ Create and manage issues  <br>
+✅ Track bug reports and project tasks <br>
+✅ Update issue status <br>
+✅ Clean and responsive UI <br>
+✅ Organized issue tracking system <br>
+✅ Developer-friendly workflow<br>
 
 <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjlxYzZlaDVjZnpjNXhqZDJpc3g1cXZhZDhuODEzeHFlOWFlMGdrZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26tn33aiTi1jkl6H6/giphy.gif" />
-🎬 Feature Preview
-📝 Create Issue
-
-📋 Manage Issues
-
-🔍 Track Progress
-
+<br>
 🛠 Tech Stack
 Frontend
 <p> <img src="https://skillicons.dev/icons?i=html,css,js,react,tailwind" /> </p>
