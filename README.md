@@ -22,6 +22,7 @@ This project demonstrates how an issue tracking system works and provides a simp
 ✅ Organized issue tracking system
 ✅ Developer-friendly workflow
 
+
 🎬 Feature Preview
 📝 Create Issue
 
@@ -34,41 +35,7 @@ Frontend
 <p> <img src="https://skillicons.dev/icons?i=html,css,js,react,tailwind" /> </p>
 Tools
 <p> <img src="https://skillicons.dev/icons?i=git,github,vscode" /> </p>
-📂 Project Structure
-B13-A5-Github-Issue-Tracker
-│
-├── client
-│   ├── components
-│   ├── pages
-│   ├── hooks
-│   └── assets
-│
-├── server
-│   ├── controllers
-│   ├── routes
-│   └── models
-│
-├── public
-├── package.json
-└── README.md
-⚙️ Installation
 
-Clone the repository
-
-git clone https://github.com/wazed-md-abdul/B13-A5-Github-Issue-Tracker.git
-
-Go to the project directory
-
-cd B13-A5-Github-Issue-Tracker
-
-Install dependencies
-
-npm install
-
-Run the project
-
-npm run dev
-🎯 Learning Objectives
 
 This project helped practice:
 
